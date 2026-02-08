@@ -2,35 +2,36 @@ import { useState } from "react";
 import classes from "./addProduct.module.css";
 
 function Product() {
-  const id = localStorage.getItem("id") ;
+  const id = localStorage.getItem("id");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
 
+  //update Name
   function handleSetName(e) {
     setName(e.target.value);
-    console.log(e.target.value);
   }
 
+  //Update Price
   function handlePrice(e) {
     setPrice(e.target.value);
-    console.log(e.target.value);
   }
 
+  //Update Category
   function handleCategory(e) {
     setCategory(e.target.value);
-    console.log(e.target.value);
   }
 
+  //Update Description
   function handleDescription(e) {
     setDescription(e.target.value);
-    console.log(e.target.value);
   }
 
+  //Add product 
   function handleAddProduct() {
-    const priceNumber = Number(price)
+    const priceNumber = Number(price);
     if (!name || !price || !category || !description) {
       setMessage("Please fill in all the fields");
       return;
@@ -55,41 +56,40 @@ function Product() {
       setMessage("Please Enter the Description");
       return;
     }
-    if (id === null){
-      setMessage("To share product need to logIn")
+    if (id === null) {
+      setMessage("To share product need to logIn");
       return;
     }
 
+    console.log(id);
 
-    console.log(id)
-
-fetch("http://localhost:5000/products/addProduct", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    productName: name,
-    price: priceNumber,
-    category: category,
-    description: description,
-    userId: id,
-  }),
-})
-  .then((res) => res.json())
-  .then((data) => {
-    setMessage(data.message);
-    setName("");
-    setPrice("");
-    setCategory("");
-    setDescription("");
-    setMessage("");
-  })
-  .catch((err) => {
-    console.error(err);
-    setMessage("Error adding Product");
-  });
-  } ;
+    fetch("http://localhost:5000/products/addProduct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productName: name,
+        price: priceNumber,
+        category: category,
+        description: description,
+        userId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMessage(data.message);
+        setName("");
+        setPrice("");
+        setCategory("");
+        setDescription("");
+        setMessage("");
+      })
+      .catch((err) => {
+        console.error(err);
+        setMessage("Error adding Product");
+      });
+  }
 
   return (
     <div className={classes.container}>
@@ -146,7 +146,7 @@ fetch("http://localhost:5000/products/addProduct", {
       <button className={classes.shareBtn} onClick={handleAddProduct}>
         <span>Share it</span>
       </button>
-      <p className= {classes.message}>{message}</p>
+      <p className={classes.message}>{message}</p>
     </div>
   );
 }

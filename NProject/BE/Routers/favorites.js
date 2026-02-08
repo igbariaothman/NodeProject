@@ -35,26 +35,21 @@ router.post("/addfavorite", (req, res) => {
   });
 });
 
-//delete favorites
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  const { userId } = req.query; 
-
-  if (!userId) {
-    return res.status(400).json({ message: "User ID required" });
-  }
-
-  const query = "DELETE FROM favorites WHERE id = ? AND userId = ?";
-  db.query(query, [id, userId], (err, results) => {
+//delete favorite
+router.delete("/:productId", (req, res) => {
+  const { productId } = req.params;
+  const { userId } = req.body;
+  const query = "DELETE FROM favorites WHERE userId = ? AND productId = ?";
+  db.query(query, [userId, productId], (err, results) => {
     if (err) {
-      return res.status(500).json(err);
+      res.status(500).send(err);
+      return;
     }
     if (results.affectedRows === 0) {
-      return res
-        .status(404)
-        .json({ message: "Product not found or not yours" });
+      res.status(404).json({ message: "Favorite not found" });
+    } else {
+      res.json({ message: "Product removed from favorites!" });
     }
-    res.json({ message: "Product deleted successfully!" });
   });
 });
 

@@ -1,8 +1,10 @@
-const path = require("path");
-const userRiuter = require('./Routers/user.js')
-const productsRiuter = require("./Routers/products.js");
-const favoritesRouter = require("./Routers/favorites.js")
+//עותמאן אגבאריה 327809190
+//214626913 אחמד חבשי
 
+const path = require("path");
+const userRiuter = require("./Routers/user.js");
+const productsRiuter = require("./Routers/products.js");
+const favoritesRouter = require("./Routers/favorites.js");
 
 const express = require("express");
 
@@ -19,11 +21,9 @@ app.use(
 
 app.use(express.json());
 
-app.use("/users" , userRiuter) ;
+app.use("/users", userRiuter);
 app.use("/products", productsRiuter);
 app.use("/favorite", favoritesRouter);
-
-
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

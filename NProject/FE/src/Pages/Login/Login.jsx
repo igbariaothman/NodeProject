@@ -15,27 +15,32 @@ function LogIn() {
   const [loggedIn , setLoggedIn] = useState(false) 
 
 
-
+// Update Email to log in 
   function handleLogEmail(e) {
     setLogEmail(e.target.value);
   }
 
+  //Update Pass to login
   function handleLogPassword(e) {
     setLogPassword(e.target.value);
   }
 
+  //Update Username to signUp
   function handleUserName (e){
     setSignUseName(e.target.value)
   }
 
+  //Update Email toSignUp 
   function handleSignEmail (e){
     setSignEmail(e.target.value)
   }
 
+  //Update Pass to signUp 
   function handleSignPassword (e) {
     setSignPassword(e.target.value)
   }
 
+  //Update confirm Pass to signUp
   function handleConfirmPassword (e) {
     setConfirmPasswoerd(e.target.value)
   }
@@ -45,6 +50,7 @@ function LogIn() {
 async function logIn() {
   setLogMessage("");
 
+  // if email or pass is empty 
   if (!logEmail || !logPassword) {
     setLogMessage("Please fill email and password");
     return;

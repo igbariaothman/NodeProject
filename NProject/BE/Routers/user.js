@@ -145,23 +145,16 @@ router.put("/:id", async (req, res) => {
 
 
 //Delete User
-router.delete("/:productId", (req, res) => {
-  const { productId } = req.params;
-  const { userId } = req.body;
-  const query = "DELETE FROM favorites WHERE userId = ? AND productId = ?";
-  db.query(query, [userId, productId], (err, results) => {
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  const query = "DELETE FROM users WHERE id = ?";
+  db.query(query, [id], (err, results) => {
     if (err) {
       res.status(500).send(err);
       return;
     }
-    if (results.affectedRows === 0) {
-      res.status(404).json({ message: "Favorite not found" });
-    } else {
-      res.json({ message: "Product removed from favorites!" });
-    }
+    res.json({ message: "User deleted!" });
   });
 });
 
-
 module.exports = router;
-

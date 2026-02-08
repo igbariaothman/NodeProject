@@ -21,6 +21,7 @@ function Home() {
     );
   }
 
+  // add to favorite 
 function addFavorite (productId){
   const userId = localStorage.getItem("id");
 

@@ -14,6 +14,7 @@ const userId = localStorage.getItem("id") ;
      .catch((err) => console.error(err));
  }, [userId]);
 
+ //delete from favorite 
 function deleteFavorite (productId){
   const userId = localStorage.getItem("id") ;
 
@@ -46,7 +47,7 @@ return (
           <h2 className={classes.name}>{p.productName}</h2>
           <p className={classes.price}>{p.price}</p>
           <p className={classes.description}>{p.description}</p>
-          <p onClick={() => deleteFavorite(p.id)}>➕</p>
+          <p onClick={() => deleteFavorite(p.id)}>❌</p>
         </div>
       </div>
     ))}
